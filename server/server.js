@@ -9,7 +9,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*", // Allow all origins (or specify your Replit URL)
     methods: ["GET", "POST"]
   }
 });
@@ -17,8 +17,23 @@ const io = socketIo(server, {
 let waitingUsers = [];
 let connectedPairs = new Map();
 
+// API endpoint to get online users count
+app.get('/api/stats', (req, res) => {
+  const onlineUsers = io.sockets.sockets.size;
+  const activeChats = connectedPairs.size / 2; // Divide by 2 since each pair is stored twice
+  
+  res.json({
+    onlineUsers,
+    waitingUsers: waitingUsers.length,
+    activeChats: Math.floor(activeChats)
+  });
+});
+
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
+  
+  // Broadcast updated user count to all clients
+  io.emit('user-count', { count: io.sockets.sockets.size });
 
   socket.on('find-peer', () => {
     if (waitingUsers.length > 0) {
@@ -29,9 +44,12 @@ io.on('connection', (socket) => {
 
       socket.emit('peer-found', { peerId: peer.id });
       peer.emit('peer-found', { peerId: socket.id });
+      
+      console.log(`Matched ${socket.id} with ${peer.id}`);
     } else {
       waitingUsers.push(socket);
       socket.emit('waiting');
+      console.log(`User ${socket.id} waiting for peer. Queue: ${waitingUsers.length}`);
     }
   });
 
@@ -62,6 +80,9 @@ io.on('connection', (socket) => {
     }
 
     waitingUsers = waitingUsers.filter(user => user.id !== socket.id);
+    
+    // Broadcast updated user count to all clients
+    io.emit('user-count', { count: io.sockets.sockets.size });
   });
 });
 
