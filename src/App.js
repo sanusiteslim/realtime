@@ -73,6 +73,10 @@ const App = () => {
       }
     };
   }, [isConnected]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7ac47e5fbac8e981b6b11593c300495f345dc0c3
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -347,6 +351,275 @@ const App = () => {
     </div>
   );
 };
+<<<<<<< HEAD
+=======
+
+const styles = {
+  container: {
+    fontFamily: "'Segoe UI', Arial, sans-serif",
+    width: '100%',
+    height: '100vh',
+    backgroundColor: '#1c1c1e',
+    color: '#ffffff',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+  },
+  header: {
+    backgroundColor: '#2c2c2e',
+    padding: '15px 30px',
+    borderBottom: '1px solid #3a3a3c',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '10px',
+  },
+  title: {
+    margin: 0,
+    fontSize: '24px',
+    fontWeight: '600',
+    color: '#ff375f',
+    letterSpacing: '0.5px',
+  },
+  controls: {
+    display: 'flex',
+    gap: '12px',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  buttonStart: {
+    padding: '16px 40px',
+    fontSize: '18px',
+    backgroundColor: '#ff375f',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    transition: 'background-color 0.2s',
+  },
+  buttonSkip: {
+    padding: '10px 20px',
+    fontSize: '14px',
+    backgroundColor: '#3a3a3c',
+    color: '#fff',
+    border: '1px solid #505052',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: '500',
+    transition: 'background-color 0.2s',
+  },
+  buttonStop: {
+    padding: '10px 20px',
+    fontSize: '14px',
+    backgroundColor: '#ff375f',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: '500',
+    transition: 'background-color 0.2s',
+  },
+  searchingContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '15px',
+  },
+  searchingText: {
+    color: '#ff375f',
+    fontSize: '18px',
+    fontWeight: '500',
+  },
+  spinner: {
+    width: '40px',
+    height: '40px',
+    border: '3px solid #3a3a3c',
+    borderTop: '3px solid #ff375f',
+    borderRadius: '50%',
+    animation: 'spin 1s linear infinite',
+  },
+  timer: {
+    fontSize: '14px',
+    color: '#8e8e93',
+    fontWeight: '500',
+    fontVariantNumeric: 'tabular-nums',
+  },
+  mainContent: {
+    flex: 1,
+    display: 'flex',
+    padding: '20px',
+    gap: '20px',
+    flexWrap: 'wrap',
+    '@media (max-width: 1024px)': {
+      flexDirection: 'column',
+    },
+  },
+  videoSection: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    minWidth: '300px',
+  },
+  videoContainer: {
+    position: 'relative',
+    backgroundColor: '#000',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    flex: 1,
+    minHeight: '300px',
+    border: '1px solid #3a3a3c',
+  },
+  remoteVideo: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  localVideo: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  placeholder: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontSize: '18px',
+    color: '#8e8e93',
+    fontWeight: '500',
+  },
+  countryBadge: {
+    position: 'absolute',
+    top: '12px',
+    right: '12px',
+    backgroundColor: 'rgba(44, 44, 46, 0.85)',
+    backdropFilter: 'blur(10px)',
+    padding: '6px 12px',
+    borderRadius: '6px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    fontSize: '13px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+  },
+  flag: {
+    fontSize: '18px',
+  },
+  chatSection: {
+    width: '350px',
+    backgroundColor: '#2c2c2e',
+    minWidth: '280px',
+  },
+  '@media (max-width: 1024px)': {
+    chatSection: {
+      width: '100%',
+      minHeight: '300px',
+    },
+    borderRadius: '8px',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    border: '1px solid #3a3a3c',
+  },
+  chatHeader: {
+    padding: '15px 20px',
+    backgroundColor: '#2c2c2e',
+    borderBottom: '1px solid #3a3a3c',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  chatTitle: {
+    margin: 0,
+    fontSize: '16px',
+    fontWeight: '600',
+    color: '#fff',
+  },
+  toggleChat: {
+    background: 'none',
+    border: 'none',
+    color: '#8e8e93',
+    fontSize: '18px',
+    cursor: 'pointer',
+    padding: '4px',
+  },
+  messagesContainer: {
+    flex: 1,
+    padding: '15px',
+    overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    backgroundColor: '#1c1c1e',
+  },
+  message: {
+    padding: '10px 12px',
+    backgroundColor: '#2c2c2e',
+    borderRadius: '8px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+  },
+  messageSender: {
+    fontWeight: '600',
+    color: '#ff375f',
+    fontSize: '13px',
+  },
+  messageText: {
+    fontSize: '14px',
+    color: '#fff',
+    lineHeight: '1.4',
+  },
+  messageTime: {
+    fontSize: '11px',
+    color: '#8e8e93',
+  },
+  inputContainer: {
+    padding: '15px',
+    borderTop: '1px solid #3a3a3c',
+    display: 'flex',
+    gap: '10px',
+    backgroundColor: '#2c2c2e',
+  },
+  input: {
+    flex: 1,
+    padding: '10px 12px',
+    backgroundColor: '#1c1c1e',
+    border: '1px solid #3a3a3c',
+    borderRadius: '6px',
+    color: '#fff',
+    fontSize: '14px',
+    outline: 'none',
+  },
+  sendButton: {
+    padding: '10px 20px',
+    backgroundColor: '#ff375f',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '14px',
+    fontWeight: '600',
+  },
+  showChatButton: {
+    position: 'fixed',
+    right: '20px',
+    bottom: '20px',
+    padding: '12px 24px',
+    backgroundColor: '#ff375f',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '14px',
+    fontWeight: '600',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+  },
+};
+>>>>>>> 7ac47e5fbac8e981b6b11593c300495f345dc0c3
 
 const styles = {
   container: {
