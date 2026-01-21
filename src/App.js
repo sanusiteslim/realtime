@@ -7,23 +7,83 @@ import io from 'socket.io-client';
 
 const CONFIG = {
   SOCKET_URL: process.env.REACT_APP_SOCKET_URL || 'http://localhost:3001',
-  SESSION_DURATION: 40 * 60, // 40 minutes in seconds
+  SESSION_DURATION: 20 * 60, // 40 minutes in seconds
   SESSION_WARNING_TIME: 5 * 60, // Show warning 5 minutes before end
   RECONNECT_ATTEMPTS: 3,
   RECONNECT_DELAY: 2000,
   MESSAGE_MAX_LENGTH: 500,
   ICE_SERVERS: {
     iceServers: [
+      // Google's public STUN servers
       { urls: 'stun:stun.l.google.com:19302' },
       { urls: 'stun:stun1.l.google.com:19302' },
       { urls: 'stun:stun2.l.google.com:19302' },
-      // Add TURN servers for production
-      // { 
+      { urls: 'stun:stun3.l.google.com:19302' },
+      { urls: 'stun:stun4.l.google.com:19302' },
+      
+      // Public TURN servers (Metered.ca - Free tier available)
+      // You can get free credentials at https://www.metered.ca/tools/openrelay/
+      {
+        urls: 'turn:openrelay.metered.ca:80',
+        username: 'openrelayproject',
+        credential: 'openrelayproject',
+      },
+      {
+        urls: 'turn:openrelay.metered.ca:443',
+        username: 'openrelayproject',
+        credential: 'openrelayproject',
+      },
+      {
+        urls: 'turn:openrelay.metered.ca:443?transport=tcp',
+        username: 'openrelayproject',
+        credential: 'openrelayproject',
+      },
+      
+      // Twilio TURN servers (if you have Twilio account)
+      // Uncomment and add your credentials from Twilio Console
+      // {
+      //   urls: 'turn:global.turn.twilio.com:3478?transport=udp',
+      //   username: process.env.REACT_APP_TWILIO_USERNAME,
+      //   credential: process.env.REACT_APP_TWILIO_CREDENTIAL,
+      // },
+      // {
+      //   urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
+      //   username: process.env.REACT_APP_TWILIO_USERNAME,
+      //   credential: process.env.REACT_APP_TWILIO_CREDENTIAL,
+      // },
+      // {
+      //   urls: 'turn:global.turn.twilio.com:443?transport=tcp',
+      //   username: process.env.REACT_APP_TWILIO_USERNAME,
+      //   credential: process.env.REACT_APP_TWILIO_CREDENTIAL,
+      // },
+      
+      // Xirsys TURN servers (if you have Xirsys account)
+      // Uncomment and add your credentials from Xirsys
+      // {
+      //   urls: 'turn:YOUR_XIRSYS_SERVER:80?transport=udp',
+      //   username: process.env.REACT_APP_XIRSYS_USERNAME,
+      //   credential: process.env.REACT_APP_XIRSYS_CREDENTIAL,
+      // },
+      // {
+      //   urls: 'turn:YOUR_XIRSYS_SERVER:3478?transport=tcp',
+      //   username: process.env.REACT_APP_XIRSYS_USERNAME,
+      //   credential: process.env.REACT_APP_XIRSYS_CREDENTIAL,
+      // },
+      
+      // Your own TURN server (recommended for production)
+      // Install coturn: https://github.com/coturn/coturn
+      // {
       //   urls: 'turn:your-turn-server.com:3478',
       //   username: process.env.REACT_APP_TURN_USERNAME,
-      //   credential: process.env.REACT_APP_TURN_CREDENTIAL
-      // }
-    ]
+      //   credential: process.env.REACT_APP_TURN_CREDENTIAL,
+      // },
+      // {
+      //   urls: 'turns:your-turn-server.com:5349',
+      //   username: process.env.REACT_APP_TURN_USERNAME,
+      //   credential: process.env.REACT_APP_TURN_CREDENTIAL,
+      // },
+    ],
+    iceCandidatePoolSize: 10,
   },
   VIDEO_CONSTRAINTS: {
     width: { ideal: 1280, max: 1920 },
